@@ -1,12 +1,14 @@
-import { Outlet } from "react-router-dom";
-import Navbar from "./components/Navbar";
+import React from 'react';
+import { Outlet } from 'react-router-dom';
+import './App.css';
 
-const App = () => {
+function App() {
   return (
-    <div className="w-full p-6">
-      <Navbar />
+    <div className="App">
+      <h1>Number Entry Application</h1>
       <Outlet />
     </div>
   );
-};
-export default App
+}
+
+export default App;

@@ -1,15 +1,23 @@
-import express from "express";
-import cors from "cors";
-import records from "./routes/record.js";
+import express from 'express';
+import cors from 'cors';
+import db from './db/connection.js'; // Adjust the path as necessary
+import numberRoutes from './routes/number.js'; // Adjust the path as necessary
 
-const PORT = process.env.PORT || 5050;
 const app = express();
 
+// Middleware
 app.use(cors());
 app.use(express.json());
-app.use("/record", records);
 
-// start the Express server
+// Use the number routes
+app.use('/numbers', numberRoutes); // This allows you to access your route at /numbers/check/:number
+
+// Example route to check server status
+app.get('/', (req, res) => {
+  res.send('Server is running!');
+});
+
+const PORT = process.env.PORT || 5000; // Define the port
 app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 });

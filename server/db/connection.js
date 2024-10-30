@@ -4,7 +4,12 @@ import dotenv from "dotenv";
 // Load environment variables from config.env
 dotenv.config({ path: './config.env' });
 
-const uri = process.env.ATLAS_URI || "mongodb://localhost:27017/mydatabase"; // Ensure the URI is correctly formatted
+const uri = process.env.ATLAS_URI;
+
+if (!uri) {
+  throw new Error("Missing ATLAS_URI in environment variables");
+}
+
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
@@ -29,6 +34,6 @@ async function connectToDatabase() {
 
 await connectToDatabase();
 
-let db = client.db("employees");
+let db = client.db("entries"); // Ensure this matches the database name in the URI
 
 export default db;
