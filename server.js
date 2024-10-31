@@ -7,7 +7,13 @@ import path from 'path';
 const app = express();
 
 // Middleware
-app.use(cors());
+const corsOptions = {
+  origin: 'https://hailstorm-problem-website-57886aac9633.herokuapp.com', // replace with your frontend URL
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Use the number routes
