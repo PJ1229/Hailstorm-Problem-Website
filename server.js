@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import db from './db/connection.js'; // Adjust the path as necessary
 import numberRoutes from './routes/number.js'; // Adjust the path as necessary
+import path from 'path';
 
 const app = express();
 
@@ -10,7 +11,17 @@ app.use(cors());
 app.use(express.json());
 
 // Use the number routes
-app.use('/api', numberRoutes); // This allows you to access your route at /numbers/check/:number
+app.use('/api', numberRoutes); // Access your route at /api/numbers/check/:number
+
+// Serve static files from the React app in production
+if (process.env.NODE_ENV === 'production') {
+  const __dirname = path.resolve();
+  app.use(express.static(path.join(__dirname, 'client/build')));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  });
+}
 
 // Example route to check server status
 app.get('/', (req, res) => {
