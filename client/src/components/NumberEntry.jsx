@@ -2,21 +2,27 @@ import React, { useState } from 'react';
 
 const NumberEntry = () => {
   const [number, setNumber] = useState('');
-  const [exists, setExists] = useState(null);
+  const [message, setMessage] = useState(null);
   const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
-    setExists(null);
+    setMessage(null);
 
     try {
       // Change the URL to include the port number if needed
-      const response = await fetch(`http://localhost:5050/numbers/check/${number}`);
+      const response = await fetch(`http://localhost:5050/api/numbers/add`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ number }),
+      });
       const data = await response.json();
 
       if (response.ok) {
-        setExists(data.exists);
+        setMessage(data.message);
       } else {
         setError(data.error || 'An error occurred');
       }
@@ -36,17 +42,9 @@ const NumberEntry = () => {
           placeholder="Enter number"
           required
         />
-        <button type="submit">Check Number</button>
+        <button type="submit">Add Number</button>
       </form>
-      {exists !== null && (
-        <div>
-          {exists ? (
-            <p>The number {number} exists in the database.</p>
-          ) : (
-            <p>The number {number} does not exist in the database.</p>
-          )}
-        </div>
-      )}
+      {message && <p>{message}</p>}
       {error && <p>{error}</p>}
     </div>
   );
