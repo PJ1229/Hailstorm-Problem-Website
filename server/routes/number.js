@@ -10,6 +10,12 @@ router.post("/numbers/add", async (req, res) => {
     const numberToAdd = parseInt(number, 10); // Ensure the number is an integer
     const collection = db.collection("numbers");
 
+    // Check if the number already exists in the database
+    const existingNumber = await collection.findOne({ number: numberToAdd });
+    if (existingNumber) {
+      return res.status(400).send({ success: false, message: "Number already exists" });
+    }
+
     // Add the number to the database
     const result = await collection.insertOne({ number: numberToAdd });
     console.log("Number added successfully");

@@ -24,7 +24,7 @@ const NumberEntry = () => {
       if (response.ok) {
         setMessage(data.message);
       } else {
-        setError(data.error || 'An error occurred');
+        setError(data.message);
       }
     } catch (err) {
       setError('An error occurred');
