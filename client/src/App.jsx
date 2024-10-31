@@ -5,7 +5,6 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <h1>Number Entry Application</h1>
       <Outlet />
     </div>
   );
