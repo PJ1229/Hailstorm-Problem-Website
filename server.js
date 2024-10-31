@@ -10,7 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 // Use the number routes
-app.use('/numbers', numberRoutes); // This allows you to access your route at /numbers/check/:number
+app.use('/api', numberRoutes); // This allows you to access your route at /numbers/check/:number
 
 // Example route to check server status
 app.get('/', (req, res) => {
