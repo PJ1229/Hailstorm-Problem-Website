@@ -8,8 +8,8 @@ router.post("/numbers/add", async (req, res) => {
   try {
     // Validate input
     const { number } = req.body;
-    if (!number) {
-      return res.status(400).send({ success: false, message: "Number is required" });
+    if (typeof number !== 'number' || isNaN(number)) {
+      return res.status(400).send({ success: false, message: "Invalid number format" });
     }
     
     const numberToAdd = parseInt(number, 10); // Ensure the number is an integer
