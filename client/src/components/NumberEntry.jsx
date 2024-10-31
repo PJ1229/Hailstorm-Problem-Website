@@ -11,13 +11,12 @@ const NumberEntry = () => {
     setMessage(null);
 
     try {
-      // Change the URL to include the port number if needed
-      const response = await fetch(`https://hailstorm-problem-website-57886aac9633.herokuapp.com/api/numbers/add`, {
+      const response = await fetch(`http://localhost:5050/api/numbers/add`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ number }),
+        body: JSON.stringify({ number: parseInt(number, 10) }), // Ensure number is sent as an integer
       });
       const data = await response.json();
 
@@ -26,27 +25,23 @@ const NumberEntry = () => {
       } else {
         setError(data.message);
       }
-    } catch (err) {
-      setError('An error occurred');
+    } catch (error) {
+      setError('An unexpected error occurred');
     }
   };
 
   return (
-    <div>
-      <h1>Enter a Number</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={number}
-          onChange={(e) => setNumber(e.target.value)}
-          placeholder="Enter number"
-          required
-        />
-        <button type="submit">Add Number</button>
-      </form>
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        value={number}
+        onChange={(e) => setNumber(e.target.value)}
+        placeholder="Enter a number"
+      />
+      <button type="submit">Add Number</button>
       {message && <p>{message}</p>}
       {error && <p>{error}</p>}
-    </div>
+    </form>
   );
 };
 
