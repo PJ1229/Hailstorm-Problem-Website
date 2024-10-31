@@ -12,7 +12,7 @@ const NumberEntry = () => {
 
     try {
       // Change the URL to include the port number if needed
-      const response = await fetch(`http://localhost:5050/api/numbers/add`, {
+      const response = await fetch(`https://your-heroku-app-name.herokuapp.com/api/numbers/add`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
