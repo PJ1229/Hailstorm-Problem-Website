@@ -11,7 +11,7 @@ const NumberEntry = () => {
     setMessage(null);
 
     try {
-      const response = await fetch(`http://localhost:5050/api/numbers/add`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/numbers/add`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -23,22 +23,22 @@ const NumberEntry = () => {
       if (response.ok) {
         setMessage(data.message);
       } else {
-        setError(data.message);
+        setError(data.error);
       }
-    } catch (error) {
-      setError('An unexpected error occurred');
+    } catch (err) {
+      setError('An error occurred. Please try again.');
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <input
-        type="text"
+        type="number"
         value={number}
         onChange={(e) => setNumber(e.target.value)}
-        placeholder="Enter a number"
+        required
       />
-      <button type="submit">Add Number</button>
+      <button type="submit">Submit</button>
       {message && <p>{message}</p>}
       {error && <p>{error}</p>}
     </form>
