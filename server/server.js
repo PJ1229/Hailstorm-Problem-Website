@@ -16,9 +16,10 @@ app.use('/api', numberRoutes); // Access your route at /api/numbers/add
 // Serve static files from the React app in production
 const __dirname = path.resolve();
 if (process.env.NODE_ENV === 'production') {
-    // No need to serve static files from a client directory
+    app.use(express.static(path.join(__dirname, 'client/dist')));
+
     app.get('*', (req, res) => {
-        res.send('API is running in production mode');
+        res.sendFile(path.join(__dirname, 'client/dist', 'index.html'));
     });
 } else {
     app.get('/', (req, res) => {
