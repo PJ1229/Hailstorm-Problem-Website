@@ -1,0 +1,32 @@
+{
+  "name": "hailstorm-problem-website",
+  "version": "1.0.0",
+  "engines": {
+    "node": "18.x"
+  },
+  "description": "<h1>Hailstorm Problem Website</h1> <li>open terminal</li> <li>cd into server</li> <li>run node server.js</li> <li>open new terminal</li> <li>cd into client</li> <li>run npm run dev</li>",
+  "main": "index.js",
+  "scripts": {
+    "client": "cd client && npm run dev",
+    "server": "cd server && nodemon server.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "npm install --prefix client && npm run build --prefix client",
+    "start": "node server/server.js"
+  },  
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^9.0.1",
+    "nodemon": "^3.1.7"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.4.20",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "mongodb": "^6.10.0",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.14"
+  }
+}
