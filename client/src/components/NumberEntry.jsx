@@ -11,7 +11,7 @@ const NumberEntry = () => {
     setMessage(null);
 
     try {
-      const response = await fetch(`https://hailstorm-problem-website-57886aac9633.herokuapp.com/api/numbers/add`, {
+      const response = await fetch(`http://localhost:5050/api/numbers/add`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
