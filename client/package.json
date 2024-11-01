@@ -7,8 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "heroku-postbuild": "npm install --prefix client && npm run build --prefix client"
+    "preview": "vite preview"
   },
   "dependencies": {
     "react": "^18.3.1",
