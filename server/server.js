@@ -14,19 +14,18 @@ app.use(express.json());
 app.use('/api', numberRoutes); // Access your route at /api/numbers/add
 
 // Serve static files from the React app in production
+const __dirname = path.resolve();
 if (process.env.NODE_ENV === 'production') {
-    const __dirname = path.resolve();
     app.use(express.static(path.join(__dirname, 'client/dist')));
 
     app.get('*', (req, res) => {
         res.sendFile(path.join(__dirname, 'client/dist', 'index.html'));
     });
+} else {
+    app.get('/', (req, res) => {
+        res.send('API is running....');
+    });
 }
-
-// Example route to check server status
-app.get('/', (req, res) => {
-    res.send('Server is running!');
-});
 
 const PORT = process.env.PORT || 5050; // Define the port
 app.listen(PORT, () => {
